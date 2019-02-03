@@ -2,7 +2,7 @@
 
 WEB client for API https://github.com/caioaraujo/bakery_payments_api_v2
 
-[![Build Status](https://travis-ci.com/caioaraujo/bakery_payments_api_v2.svg?branch=master)](https://travis-ci.com/caioaraujo/bakery_payments_api_v2)
+[![Build Status](https://travis-ci.com/caioaraujo/bakery_payments_web.svg?branch=master)](https://travis-ci.com/caioaraujo/bakery_payments_web)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
