@@ -5,26 +5,22 @@ import React, { Component } from "react";
       {
         id: 1,
         name: "Branch A",
-        current_balance: "5677.80",
-        completed: false
+        current_balance: "5677.80"
       },
       {
         id: 2,
         name: "Branch B",
-        current_balance: "33.77",
-        completed: false
+        current_balance: "33.77"
       },
       {
         id: 3,
         name: "Branch C",
-        current_balance: "1111111111",
-        completed: false
+        current_balance: "1111111111"
       },
       {
         id: 4,
         name: "Branch D",
-        current_balance: "0.00",
-        completed: false
+        current_balance: "0.00"
       }
     ];
     class App extends Component {
@@ -56,34 +52,12 @@ import React, { Component } from "react";
       editItem = item => {
         this.setState({ activeItem: item, modal: !this.state.modal });
       };
-      displayCompleted = status => {
-        
-        return this.setState({ viewCompleted: false });
-        
+      showPayments = item => {
+        return null;
       };
-      renderTabList = () => {
-        return (
-          <div className="my-5 tab-list">
-            <span
-              onClick={() => this.displayCompleted(true)}
-              className={this.state.viewCompleted ? "active" : ""}
-            >
-              complete
-            </span>
-            <span
-              onClick={() => this.displayCompleted(false)}
-              className={this.state.viewCompleted ? "" : "active"}
-            >
-              Incomplete
-            </span>
-          </div>
-        );
-      };
+      
       renderItems = () => {
-        const { viewCompleted } = this.state;
-        const newItems = this.state.branchList.filter(
-          item => item.completed === viewCompleted
-        );
+        const newItems = this.state.branchList;
         return newItems.map(item => (
           <li
             key={item.id}
@@ -93,6 +67,12 @@ import React, { Component } from "react";
               {item.name}
             </span>
             <span>
+              <button
+                onClick={() => this.showPayments(item)}
+                className="btn btn-success mr-2"
+              >
+                  Show payments
+              </button>
               <button
                 onClick={() => this.editItem(item)}
                 className="btn btn-secondary mr-2"
@@ -121,7 +101,6 @@ import React, { Component } from "react";
                       Add branch
                     </button>
                   </div>
-                  {this.renderTabList()}
                   <ul className="list-group list-group-flush">
                     {this.renderItems()}
                   </ul>
