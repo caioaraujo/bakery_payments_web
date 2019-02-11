@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Modal from "./components/Modal";
+import ModalEdit from "./components/ModalEdit";
+import ModalConfirmDelete from "./components/ModalConfirmDelete";
 import axios from "axios";
 
 
@@ -28,10 +29,20 @@ class App extends Component {
   };
   handleSubmit = item => {
     this.toggle();
-    alert("save" + JSON.stringify(item));
+    if (item.id) {
+      axios
+        .put(`http://localhost:8000/v1/branches/${item.id}/`, item)
+        .then(res => this.refreshList());
+      return;
+    }
+    axios
+      .post("http://localhost:8000/v1/branches/", item)
+      .then(res => this.refreshList());
   };
   handleDelete = item => {
-    alert("delete" + JSON.stringify(item));
+    axios
+      .delete(`http://localhost:8000/v1/branches/${item.id}`)
+      .then(res => this.refreshList());
   };
   createItem = () => {
     const item = { name: "", currenct_balance: "" };
@@ -96,7 +107,7 @@ class App extends Component {
           </div>
         </div>
         {this.state.modal ? (
-          <Modal
+          <ModalEdit
             activeItem={this.state.activeItem}
             toggle={this.toggle}
             onSave={this.handleSubmit}
